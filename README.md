@@ -221,13 +221,9 @@ payment_analysis
 
 ## dbt Lineage
 
-*(Add screenshot here)*
 
-```
-screenshots/dbt_lineage.png
-```
+![Screenshots](screenshots/dbt_lineage.png)
 
----
 
 ## dbt Run
 
