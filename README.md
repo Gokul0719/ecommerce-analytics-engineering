@@ -1,14 +1,34 @@
 # 🛒 End-to-End E-Commerce Analytics Engineering Pipeline
 
+![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python)
+![PySpark](https://img.shields.io/badge/PySpark-3.5-orange?logo=apachespark)
+![Databricks](https://img.shields.io/badge/Databricks-Community-red?logo=databricks)
+![Delta Lake](https://img.shields.io/badge/Delta-Lake-00ADD8)
+![dbt](https://img.shields.io/badge/dbt-1.11-orange?logo=dbt)
+![DuckDB](https://img.shields.io/badge/DuckDB-Analytics-yellow)
+
 A modern Analytics Engineering project that demonstrates how raw e-commerce transaction data can be transformed into business-ready analytical datasets using **Databricks, PySpark, Delta Lake, DuckDB, and dbt**.
 
-This project follows a layered architecture inspired by modern data platforms and implements data quality testing, lineage tracking, and modular SQL transformations.
+The project follows a layered architecture inspired by modern data platforms while implementing modular SQL transformations, data quality testing, and automated lineage documentation.
 
 ---
 
 # 📌 Architecture
 
 ![Architecture](architecture/architecture.png)
+
+---
+
+# ✨ Features
+
+- End-to-end Analytics Engineering pipeline
+- Layered architecture (Bronze → Silver → Fact → Marts)
+- Delta Lake based storage
+- Modular SQL transformations using dbt
+- Data quality validation using dbt tests
+- Automated lineage documentation
+- Reusable business-ready analytical marts
+- Well-structured, production-inspired repository
 
 ---
 
@@ -48,7 +68,7 @@ Parquet Export
 DuckDB
         │
         ▼
-dbt Staging Layer
+dbt Staging
         │
         ▼
 Fact Layer
@@ -59,7 +79,7 @@ Business Marts
 
 ---
 
-# 📂 Project Structure
+# 📂 Repository Structure
 
 ```
 ecommerce-analytics-engineering
@@ -85,11 +105,11 @@ ecommerce-analytics-engineering
 
 ---
 
-# ⚙️ Workflow
+# ⚙️ Pipeline Implementation
 
 ## Step 1 — Generate Synthetic Data
 
-Generated realistic e-commerce datasets using PySpark, including:
+Generated realistic e-commerce datasets using PySpark including:
 
 - Customers
 - Products
@@ -102,11 +122,11 @@ Generated realistic e-commerce datasets using PySpark, including:
 
 Raw datasets are ingested into Delta Lake without transformation.
 
-Purpose:
+Objectives:
 
 - Preserve raw data
-- Enable reproducibility
-- Maintain immutable source records
+- Maintain reproducibility
+- Store immutable source records
 
 ---
 
@@ -117,8 +137,8 @@ Business transformations include:
 - Data cleansing
 - Data enrichment
 - Revenue calculation
-- Table joins
-- Business-ready dataset creation
+- Business joins
+- Creation of an analytics-ready dataset
 
 Output:
 
@@ -130,11 +150,11 @@ orders_enriched
 
 ## Step 4 — Export to Parquet
 
-The enriched dataset is exported as Parquet files for downstream analytics processing.
+The enriched dataset is exported as Parquet files for downstream Analytics Engineering.
 
 ---
 
-## Step 5 — Analytics Engineering with dbt
+## Step 5 — Analytics Engineering using dbt
 
 ### Staging Layer
 
@@ -142,7 +162,7 @@ The enriched dataset is exported as Parquet files for downstream analytics proce
 stg_orders
 ```
 
-Standardizes and prepares source data for downstream models.
+Standardizes and prepares source data.
 
 ---
 
@@ -152,98 +172,74 @@ Standardizes and prepares source data for downstream models.
 fact_orders
 ```
 
-Central business-ready fact table used by all analytical marts.
+Creates a centralized business-ready fact table.
 
 ---
 
 ### Business Marts
 
-The project builds reusable analytical models:
-
-- 📈 Monthly Revenue
-- 🌍 Sales by Country
-- 👥 Top Customers
-- 📦 Product Performance
-- 💳 Payment Analysis
-
----
-
-# ✅ Data Quality Tests
-
-Implemented using **dbt tests**.
-
-Current validations include:
-
-- Unique Order IDs
-- Non-null Customer IDs
-- Valid Payment Status Values
-
-Example:
-
-```
-PASS=4
-WARN=0
-ERROR=0
-```
+| Model | Description |
+|-------|-------------|
+| fact_orders | Central business-ready fact table |
+| top_customers | Highest revenue-generating customers |
+| sales_by_country | Country-wise sales analysis |
+| monthly_revenue | Monthly revenue trends |
+| product_performance | Product performance analysis |
+| payment_analysis | Payment status and payment method analysis |
 
 ---
 
 # 📊 dbt Lineage
 
-The project uses dbt documentation to visualize model dependencies.
+The following lineage illustrates how the staging model feeds the centralized fact table, which powers all downstream business marts.
 
-Example lineage:
-
-```
-stg_orders
-      │
-      ▼
-fact_orders
-      │
-      ├──────────────┬──────────────┬──────────────┬──────────────┐
-      ▼              ▼              ▼              ▼              ▼
-top_customers
-sales_by_country
-monthly_revenue
-product_performance
-payment_analysis
-```
+![dbt Lineage](screenshots/dbt_lineage.png)
 
 ---
 
-# 📸 Project Screenshots
+# ✅ Data Quality Validation
 
-## Architecture
+Implemented using **dbt generic tests**.
 
-![Architecture](architecture/architecture.png)
+Current validations include:
+
+- Unique Order IDs
+- Non-null Customer IDs
+- Accepted Payment Status values
+
+### Test Results
+
+![dbt Tests](screenshots/dbt_test.png)
 
 ---
 
-## dbt Lineage
+# 🚀 Build Results
 
+The project successfully builds all analytical models.
 
-![Screenshots](screenshots/dbt_lineage.png)
+![dbt Run](screenshots/dbt_run.png)
 
+---
 
-## dbt Run
+# 📈 Project Highlights
 
+- Built using **7 modular dbt models**
+- Implemented **4 automated data quality tests**
+- Layered architecture from Bronze to Business Marts
+- Analytics Engineering workflow using DuckDB and dbt
+- Modular SQL transformations using `ref()`
+- Automated lineage documentation
 
-![Screenshots](screenshots/dbt_run.png)
-
-
-## dbt Tests
-
-![Screenshots](screenshots/dbt_test.png)
-
+---
 
 # 💡 Key Learnings
 
-Through this project I learned how modern Analytics Engineering differs from traditional ETL development.
+This project helped deepen my understanding of modern Analytics Engineering practices beyond traditional ETL development.
 
 Key concepts explored include:
 
 - Layered data architecture
-- Modular SQL transformations using dbt
+- Modular SQL transformations
 - Fact-based analytical modeling
 - Data quality testing
 - Automated lineage documentation
@@ -253,11 +249,11 @@ Key concepts explored include:
 
 # 🔮 Future Enhancements
 
-- CI/CD for dbt
 - Incremental dbt models
+- CI/CD for dbt deployments
 - Automated orchestration
 - Cloud deployment (Azure / AWS)
-- Dashboarding with Power BI or Apache Superset
+- Business Intelligence integration (Power BI / Apache Superset)
 
 ---
 
@@ -265,4 +261,10 @@ Key concepts explored include:
 
 **Gokul Saravanan**
 
-If you found this project useful or have suggestions for improvement, feel free to connect or open an issue.
+Aspiring Data & Analytics Engineer passionate about building scalable data platforms using modern data technologies.
+
+If you have feedback or suggestions, feel free to open an issue or connect with me on LinkedIn.
+
+---
+
+⭐ If you found this project useful, consider giving it a star!
