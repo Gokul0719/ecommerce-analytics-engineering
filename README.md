@@ -236,16 +236,6 @@ payment_analysis
 ![Screenshots](screenshots/dbt_test.png)
 
 
-## Databricks Workflow
-
-*(Add screenshot here)*
-
-```
-screenshots/databricks_workflow.png
-```
-
----
-
 # 💡 Key Learnings
 
 Through this project I learned how modern Analytics Engineering differs from traditional ETL development.
