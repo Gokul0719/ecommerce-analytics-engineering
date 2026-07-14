@@ -227,23 +227,14 @@ payment_analysis
 
 ## dbt Run
 
-*(Add screenshot here)*
 
-```
-screenshots/dbt_run.png
-```
+![Screenshots](screenshots/dbt_run.png)
 
----
 
 ## dbt Tests
 
-*(Add screenshot here)*
+![Screenshots](screenshots/dbt_test.png)
 
-```
-screenshots/dbt_test.png
-```
-
----
 
 ## Databricks Workflow
 
